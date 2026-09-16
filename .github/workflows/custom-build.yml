@@ -49,7 +49,7 @@ jobs:
 
     - name: Build binaries
       id: idf_build
-      uses: ctag-fh-kiel/esp-idf-action@5
+      uses: ctag-fh-kiel/esp-idf-action@6
       
     - name: Generate flash script
       run: echo "${{ steps.idf_build.outputs.build_output }}" | python .github/generate-flash-script.py
