@@ -35,21 +35,21 @@ jobs:
           echo "${{ github.event.inputs.apps }}" | python .github/remove-apps.py
         fi
 
-    - name: Build binaries
-      uses: ctag-fh-kiel/esp-idf-action@1
+    # - name: Build binaries
+    #  uses: ctag-fh-kiel/esp-idf-action@1
 
-    - name: Update partition table and rom config
-      run: |
-        echo "${{ github.event.inputs.platform }}" | python .github/update-partition-table.py
+    # - name: Update partition table and rom config
+    #  run: |
+    #    echo "${{ github.event.inputs.platform }}" | python .github/update-partition-table.py
         
-    - name: Remove previous build and sdkconfig
-      run: |
-        sudo rm -rf build
-        sudo rm -rf sdkconfig
+    # - name: Remove previous build and sdkconfig
+    #  run: |
+    #    sudo rm -rf build
+    #    sudo rm -rf sdkconfig
 
     - name: Build binaries
       id: idf_build
-      uses: ctag-fh-kiel/esp-idf-action@3
+      uses: ctag-fh-kiel/esp-idf-action@5
       
     - name: Generate flash script
       run: echo "${{ steps.idf_build.outputs.build_output }}" | python .github/generate-flash-script.py
