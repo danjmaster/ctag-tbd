@@ -22,6 +22,10 @@ jobs:
         submodules: 'recursive'
         fetch-depth: 0
         
+    - name: Copy config
+      run: |
+        cp sdkconfig.defaults.strampler sdkconfig.defaults
+        
     - name: Set up Python 3.9
       uses: actions/setup-python@v4
       with:
@@ -37,9 +41,16 @@ jobs:
 
     # - name: Build binaries
       # uses: ctag-fh-kiel/esp-idf-action@1
-    - name: Build binaries
-      id: idf_build
-      uses: ctag-fh-kiel/esp-idf-action@6
+    # - name: Build binaries
+      # id: idf_build
+      # uses: ctag-fh-kiel/esp-idf-action@6
+
+    - name: esp-idf build
+      uses: espressif/esp-idf-ci-action@v1.1.0
+      with:
+        esp_idf_version: v5.1.1
+        target: esp32
+        command: idf.py update-dependencies build
 
     - name: Update partition table and rom config
       run: |
@@ -63,7 +74,10 @@ jobs:
 
     - name: Upload binary
       uses: actions/upload-artifact@v4
+      # 4 -> 7?
       with:
         name: Custom tbd firmware
         # A file, directory or wildcard pattern that describes what to upload
         path: ./binaries.zip
+
+        
