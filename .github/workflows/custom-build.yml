@@ -38,14 +38,14 @@ jobs:
     # - name: Build binaries
     #  uses: ctag-fh-kiel/esp-idf-action@1
 
-    # - name: Update partition table and rom config
-    #  run: |
-    #    echo "${{ github.event.inputs.platform }}" | python .github/update-partition-table.py
+    - name: Update partition table and rom config
+     run: |
+       echo "${{ github.event.inputs.platform }}" | python .github/update-partition-table.py
         
-    # - name: Remove previous build and sdkconfig
-    #  run: |
-    #    sudo rm -rf build
-    #    sudo rm -rf sdkconfig
+    - name: Remove previous build and sdkconfig
+     run: |
+       sudo rm -rf build
+       sudo rm -rf sdkconfig
 
     - name: Build binaries
       id: idf_build
