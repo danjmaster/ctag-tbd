@@ -35,8 +35,8 @@ jobs:
           echo "${{ github.event.inputs.apps }}" | python .github/remove-apps.py
         fi
 
-    # - name: Build binaries
-    #  uses: ctag-fh-kiel/esp-idf-action@1
+    - name: Build binaries
+      uses: ctag-fh-kiel/esp-idf-action@1
 
     - name: Update partition table and rom config
       run: |
